@@ -81,7 +81,7 @@ bot.onText(/\/info ([A-Z]{2}\d{6})/, async (msg, match) => {
     
         bot.sendMessage(chatId, `${name}\n${info}`);
     } catch (e) {
-        bot.sendMessage(chatId, data + '111');
+        bot.sendMessage(chatId, response);
     }
 });
 
