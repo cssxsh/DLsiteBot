@@ -65,6 +65,8 @@ bot.onText(/\/info ([A-Z]{2}\d{6})/, async (msg, match) => {
     }
     const url = `https://www.dlsite.com/${type}/work/=/product_id/${id}.html`;
 
+    bot.sendMessage(chatId, `get info by ${url}:`);
+
     const response = await got({
         method: 'get',
         url: url,
