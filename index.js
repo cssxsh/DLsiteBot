@@ -78,8 +78,9 @@ bot.onText(/\/info ([A-Z]{2}\d{6})/, async (msg, match) => {
 
     const $ = cheerio.load(data);
     const name = $('#work_name').text();
-    
-    bot.sendMessage(chatId, name);
+    const info = $('#work_right').text();
+
+    bot.sendMessage(chatId, `${name}\n${info}`);
 });
 
 bot.onText(/\/echo (.+)/, (msg, match) => {
