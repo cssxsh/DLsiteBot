@@ -72,7 +72,7 @@ bot.onText(/\/info ([A-Z]{2}\d{6})/, async (msg, match) => {
     const response = await got(url, {
         method: 'get'
     });
-
+    bot.sendMessage(chatId, response.statusCode);
     const data = response.data;
     try {
         const $ = cheerio.load(data);
