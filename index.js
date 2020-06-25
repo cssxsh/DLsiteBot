@@ -6,7 +6,7 @@ const https = require('https');
 const fs = require('fs');
 
 const TOKEN = '1296868975:AAHaknJirDGHLR1aYqLwF0ka68TE81hs6WE';
-const url = 'https://aliyun.cssxsh.xyz';
+const url = 'https://racknerd.cssxsh.xyz';
 const port = 443;
 
 const bot = new TelegramBot(TOKEN);
@@ -22,8 +22,8 @@ app.post(`/bot${TOKEN}`, (req, res) => {
 });
 
 const options = {
-    key: fs.readFileSync(`/home/cssxsh/.ssl/4077636_aliyun.cssxsh.xyz.key`),
-    cert: fs.readFileSync(`/home/cssxsh/.ssl/4077636_aliyun.cssxsh.xyz_public.crt`),
+    key: fs.readFileSync(`/home/cssxsh/.ssl/cloudflare.key`),
+    cert: fs.readFileSync(`/home/cssxsh/.ssl/cloudflare.crt`),
 };
 
 const httpsServer = https.createServer(options, app);
