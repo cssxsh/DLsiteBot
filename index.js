@@ -58,6 +58,8 @@ bot.onText(/\/info ([A-Z]{2}\d{6})/, async (msg, match) => {
     const id = match[1];
     let type = 'maniax';
 
+    bot.sendMessage(chatId, `id: ${id}`);
+
     switch (id.slice(0, 2)) {
         case ('RJ'):
             type = 'maniax'
@@ -76,6 +78,7 @@ bot.onText(/\/info ([A-Z]{2}\d{6})/, async (msg, match) => {
 
     const $ = cheerio.load(data);
     const name = $('#work_name').text();
+    
     bot.sendMessage(chatId, name);
 });
 
