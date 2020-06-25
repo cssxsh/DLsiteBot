@@ -6,8 +6,8 @@ const https = require('https');
 const fs = require('fs');
 
 const TOKEN = '1296868975:AAHaknJirDGHLR1aYqLwF0ka68TE81hs6WE';
-const url = 'https://aliyun.cssxsh.xyz'; // 你自己的域名
-const port = 8443;
+const url = 'http://racknerd.cssxsh.xyz'; // 你自己的域名
+const port = 8080;
 
 const bot = new TelegramBot(TOKEN);
 bot.setWebHook(`${url}:${port}/bot${TOKEN}`);
@@ -21,18 +21,20 @@ app.post(`/bot${TOKEN}`, (req, res) => {
     res.sendStatus(200);
 });
 
-const options = {
-    key: fs.readFileSync(`${process.env.HOME}/.ssl/4077636_aliyun.cssxsh.xyz.key`),
-    cert: fs.readFileSync(`${process.env.HOME}/.ssl/4077636_aliyun.cssxsh.xyz_public.crt`),
-};
+// const options = {
+//     key: fs.readFileSync(`${process.env.HOME}/.ssl/4077636_aliyun.cssxsh.xyz.key`),
+//     cert: fs.readFileSync(`${process.env.HOME}/.ssl/4077636_aliyun.cssxsh.xyz_public.crt`),
+// };
 
-const httpsServer = https.createServer(options, app);
+// const httpsServer = https.createServer(options, app);
 
-httpsServer.listen(port);
+// httpsServer.listen(port);
 
 bot.onText(/\/hentai/, function onLoveText(msg) {
     bot.sendMessage(msg.chat.id, 'Are you a hetai?');
 });
+
+app.listen(port);
 
 bot.onText(/\/prpr/, function onLoveText(msg) {
     const chatId = msg.chat.id;
