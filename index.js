@@ -22,8 +22,8 @@ app.post(`/bot${TOKEN}`, (req, res) => {
 });
 
 const options = {
-    key: fs.readFileSync(`${process.env.HOME}/.ssl/4077636_aliyun.cssxsh.xyz.key`),
-    cert: fs.readFileSync(`${process.env.HOME}/.ssl/4077636_aliyun.cssxsh.xyz_public.crt`),
+    key: fs.readFileSync(`/home/cssxsh/.ssl/4077636_aliyun.cssxsh.xyz.key`),
+    cert: fs.readFileSync(`/home/cssxsh/.ssl/4077636_aliyun.cssxsh.xyz_public.crt`),
 };
 
 const httpsServer = https.createServer(options, app);
