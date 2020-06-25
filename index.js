@@ -5,7 +5,7 @@ const request = require('request');
 const https = require('https');
 const fs = require('fs');
 const cheerio = require('cheerio');
-const { match } = require('assert');
+const got = require('got');
 
 const TOKEN = '1296868975:AAHaknJirDGHLR1aYqLwF0ka68TE81hs6WE';
 const url = 'https://racknerd.cssxsh.xyz';
@@ -53,10 +53,28 @@ bot.onText(/\/prpr/, function onLoveText(msg) {
     });
 });
 
-bot.onText(/\/info ([A-Z]{2}\d{6})/, (msg, match) => {
+bot.onText(/\/info ([A-Z]{2}\d{6})/, async (msg, match) => {
     const chatId = msg.chat.id;
     const id = match[1];
-    bot.sendMessage(chatId, id);
+    let type = 'maniax';
+
+    switch (id.slice(0, 2)) {
+        case ('RJ'):
+            type = 'maniax'
+            break;
+    }
+    const url = `https://www.dlsite.com/${type}/work/=/product_id/${id}.html`;
+
+    const response = await got({
+        method: 'get',
+        url: url,
+    });
+
+    const data = response.data;
+
+    const $ = cheerio.load(data);
+    const name = $('#work_name').text();
+    bot.sendMessage(chatId, name);
 });
 
 bot.onText(/\/echo (.+)/, (msg, match) => {
