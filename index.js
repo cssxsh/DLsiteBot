@@ -7,7 +7,7 @@ const fs = require('fs');
 
 const TOKEN = '1296868975:AAHaknJirDGHLR1aYqLwF0ka68TE81hs6WE';
 const url = 'http://racknerd.cssxsh.xyz'; // 你自己的域名
-const port = 8080;
+const port = 80;
 
 const bot = new TelegramBot(TOKEN);
 bot.setWebHook(`${url}:${port}/bot${TOKEN}`);
