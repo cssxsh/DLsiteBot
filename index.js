@@ -7,7 +7,7 @@ const fs = require('fs');
 
 const TOKEN = '1296868975:AAHaknJirDGHLR1aYqLwF0ka68TE81hs6WE';
 const url = 'https://aliyun.cssxsh.xyz';
-const port = 8443;
+const port = 443;
 
 const bot = new TelegramBot(TOKEN);
 bot.setWebHook(`${url}:${port}/bot${TOKEN}`);
