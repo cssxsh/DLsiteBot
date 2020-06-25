@@ -58,11 +58,11 @@ bot.onText(/\/info ([A-Z]{2}\d{6})/, async (msg, match) => {
     const id = match[1];
     let type = 'maniax';
 
-    bot.sendMessage(chatId, `id: ${id}`);
+    // bot.sendMessage(chatId, `id: ${id}`);
 
     switch (id.slice(0, 2)) {
-        case ('RJ'):
-            type = 'maniax'
+        case 'RJ':
+            type = 'maniax';
             break;
     }
     const url = `https://www.dlsite.com/${type}/work/=/product_id/${id}.html`;
@@ -75,12 +75,16 @@ bot.onText(/\/info ([A-Z]{2}\d{6})/, async (msg, match) => {
     });
 
     const data = response.data;
-
-    const $ = cheerio.load(data);
-    const name = $('#work_name').text();
-    const info = $('#work_right').text();
-
-    bot.sendMessage(chatId, `${name}\n${info}`);
+    try {
+        const $ = cheerio.load(data);
+    } catch (e) {
+        bot.sendMessage(chatId, e);
+    } finally {
+        const name = $('#work_name').text();
+        const info = $('#work_right').text();
+    
+        bot.sendMessage(chatId, `${name}\n${info}`);
+    }
 });
 
 bot.onText(/\/echo (.+)/, (msg, match) => {
