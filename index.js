@@ -4,6 +4,8 @@ const bodyParser = require('body-parser');
 const request = require('request');
 const https = require('https');
 const fs = require('fs');
+const cheerio = require('cheerio');
+const { match } = require('assert');
 
 const TOKEN = '1296868975:AAHaknJirDGHLR1aYqLwF0ka68TE81hs6WE';
 const url = 'https://racknerd.cssxsh.xyz';
@@ -49,6 +51,12 @@ bot.onText(/\/prpr/, function onLoveText(msg) {
             bot.sendMessage(chatId, '手冲失败');
         }
     });
+});
+
+bot.onText(/\/info ([A-Z]{2}\d{6})/, (msg, match) => {
+    const chatId = msg.chat.id;
+    const id = match[1];
+    bot.sendMessage(chatId, id);
 });
 
 bot.onText(/\/echo (.+)/, (msg, match) => {
