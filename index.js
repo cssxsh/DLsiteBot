@@ -79,7 +79,7 @@ bot.onText(/\/info ([A-Z]{2}\d{6})/, async (msg, match) => {
         const work_name = $('#work_name').text();
         const work_maker = $('#work_maker').html();
     
-        bot.sendMessage(chatId, `${work_maker}`);
+        bot.sendMessage(chatId, `work_name: [${work_name}](${url})`);
     } catch (e) {
         bot.sendMessage(chatId, response);
     }
