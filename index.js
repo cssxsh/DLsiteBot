@@ -71,6 +71,7 @@ bot.onText(/\/info ([A-Z]{2}\d{6})/, async (msg, match) => {
                     .map((index, element) => {
                         let html = '';
                         element.children.forEach((child) => {
+                            const ele = $(child);
                             const type = child.attribs['class'];
                             switch (type) {
                                 case 'work_genre':
@@ -79,11 +80,11 @@ bot.onText(/\/info ([A-Z]{2}\d{6})/, async (msg, match) => {
                                     });
                                     break;
                                 case 'main_genre':
-                                    html += child.html();
+                                    html += ele.html();
                                     break;
                                 default:
                                     const url = child.attribs['href'];
-                                    html += url ? child.nodeValue.link(url) : child.text();
+                                    html += url ? ele.text().link(url) : ele.text();
                             }
                         });
                         return html;
