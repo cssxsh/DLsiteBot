@@ -74,7 +74,7 @@ bot.onText(/\/info ([A-Z]{2}\d{6})/, async (msg, match) => {
 
         let html = `${work_name.link(url)}` + '\n' + `${work_maker}`;
 
-        infos.forEach((item) => {
+        infos.forEach(function (item) {
             html.concat('\n');
             html.concat(item);
         });
