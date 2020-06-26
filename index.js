@@ -83,7 +83,7 @@ bot.onText(/\/info ([A-Z]{2}\d{6})/, async (msg, match) => {
                                             html += url ? text.link(url) : text.trim();
                                             return html;
                                         })
-                                        .join(' ');
+                                        .join('&nbsp;');
                                     break;
                                 case 'main_genre':
                                     html += child.html().trim();
@@ -97,7 +97,7 @@ bot.onText(/\/info ([A-Z]{2}\d{6})/, async (msg, match) => {
                         return html.trim();
                     })
                     .get()
-                    .join(' ');
+                    .join('&nbsp;');
                 return `${name}: ${value}`;
             })
             .get()
