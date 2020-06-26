@@ -32,11 +32,7 @@ const httpsServer = https.createServer(options, app);
 httpsServer.listen(PORT);
 
 bot.onText(/\/start/, () => {
-    bot.sendMessage(
-        '\/start' + '\n' +
-        '\/info' + '\n' +
-        '\/echo'
-    );
+    bot.sendMessage('/start' + '\n' + '/info' + '\n' + '/echo');
 });
 
 bot.onText(/\/info ([A-Z]{2}\d{6})/, async (msg, match) => {
@@ -53,10 +49,10 @@ bot.onText(/\/info ([A-Z]{2}\d{6})/, async (msg, match) => {
     }
     const url = `https://www.dlsite.com/${type}/work/=/product_id/${id}.html`;
 
-    bot.sendMessage(chatId, `get info by ${url}:`);
+    // bot.sendMessage(chatId, `get info by ${url}:`);
 
     const response = await got(url, {
-        method: 'get'
+        method: 'get',
     });
     // bot.sendMessage(chatId, response.statusCode);
     const body = response.body;
@@ -64,10 +60,10 @@ bot.onText(/\/info ([A-Z]{2}\d{6})/, async (msg, match) => {
         const $ = cheerio.load(body);
         const work_name = $('#work_name').text();
         const work_maker = $('#work_maker').html();
-    
-        bot.sendMessage(chatId, `work_name: [${work_name}](${url})`, {parse_mode : 'MarkdownV2'});
+
+        bot.sendMessage(chatId, `work_name: [${work_name}](${url})`, { parse_mode: 'MarkdownV2' });
     } catch (e) {
-        bot.sendMessage(chatId, response);
+        console.error(e);
     }
 });
 
