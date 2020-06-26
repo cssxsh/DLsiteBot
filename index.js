@@ -83,10 +83,10 @@ bot.onText(/\/info ([A-Z]{2}\d{6})/, async (msg, match) => {
                                             html += url ? text.link(url) : text.trim();
                                             return html;
                                         })
-                                        .join();
+                                        .join(' ');
                                     break;
                                 case 'main_genre':
-                                    html += child.html();
+                                    html += child.html().trim();
                                     break;
                                 default:
                                     const url = child.attr('href');
@@ -94,7 +94,7 @@ bot.onText(/\/info ([A-Z]{2}\d{6})/, async (msg, match) => {
                                     html += url ? text.link(url) : text.trim();
                             }
                         });
-                        return html;
+                        return html.trim();
                     })
                     .get()
                     .join(' ');
