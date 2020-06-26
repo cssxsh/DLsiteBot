@@ -94,7 +94,7 @@ bot.onText(/\/info ([A-Z]{2}\d{6})/, async (msg, match) => {
                                     html += url ? text.link(url) : text.trim();
                             }
                         });
-                        return html.trim().replace('<\/a>', '<\/a>&nbsp;');
+                        return html.trim().replace('<\/a>', '<\/a> ');
                     })
                     .get()
                     .join('&nbsp;');
