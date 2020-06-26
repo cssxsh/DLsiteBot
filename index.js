@@ -62,7 +62,7 @@ bot.onText(/\/info ([A-Z]{2}\d{6})/, async (msg, match) => {
         const $ = cheerio.load(body);
         const work_name = $('#work_name').text().trim();
         const work_maker = `${$('th', '#work_maker').text()}: ${$('span.maker_name').html().trim()}`;
-        const work_info = $('tr', '#work_outline');
+        const work_info = $('#work_outline tr');
 
         const infos = work_info
             .map((index, element) => {
