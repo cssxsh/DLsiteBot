@@ -75,14 +75,23 @@ bot.onText(/\/info ([A-Z]{2}\d{6})/, async (msg, match) => {
                             const type = child.attr('class');
                             switch (type) {
                                 case 'work_genre':
-                                    //
+                                    ele.children
+                                        .map((ele) => {
+                                            const child = $(ele);
+                                            const url = child.attr('href');
+                                            const text = child.text().trim();
+                                            html += url ? text.link(url) : text.trim();
+                                            return html;
+                                        })
+                                        .join();
                                     break;
                                 case 'main_genre':
                                     html += child.html();
                                     break;
                                 default:
                                     const url = child.attr('href');
-                                    html += url ? child.text().link(url) : child.text();
+                                    const text = child.text().trim();
+                                    html += url ? text.link(url) : text.trim();
                             }
                         });
                         return html;
