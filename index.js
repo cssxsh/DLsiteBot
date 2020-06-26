@@ -33,9 +33,7 @@ httpsServer.listen(PORT);
 
 bot.onText(/\/start/, (msg) => {
     const chatId = msg.chat.id;
-    const cmd = '/start' + '\n' + 
-                '/info' + '\n' + 
-                '/echo';
+    const cmd = '/start' + '\n' + '/info' + '\n' + '/echo';
     bot.sendMessage(chatId, cmd);
 });
 
@@ -66,14 +64,21 @@ bot.onText(/\/info ([A-Z]{2}\d{6})/, async (msg, match) => {
         const work_maker = `${$('th', '#work_maker').text()}: ${$('span.maker_name').html().trim()}`;
         const work_info = $('tr', '#work_outline');
 
-        let html = `${work_name.link(url)}` + '\n' +
-                    `${work_maker}`;
-        work_info.map((index, element) => {
-            const name = $('th', element).text();
-            const value = $('td', element).text();
-            html.concat(`\n${name}: ${value}`);
+        const infos = work_info
+            .map((index, element) => {
+                const name = $('th', element).text();
+                const value = $('td', element).text();
+                return `${name}: ${value}`;
+            })
+            .get();
+
+        let html = `${work_name.link(url)}` + '\n' + `${work_maker}`;
+
+        infos.forEach((item) => {
+            html.concat('\n');
+            html.concat(item);
         });
-        
+
         console.log(html);
         bot.sendMessage(chatId, html, { parse_mode: 'HTML' });
     } catch (e) {
