@@ -64,9 +64,15 @@ bot.onText(/\/info ([A-Z]{2}\d{6})/, async (msg, match) => {
         const $ = cheerio.load(body);
         const work_name = $('#work_name').text().trim();
         const work_maker = `${$('th', '#work_maker').text()}: ${$('span.maker_name').html().trim()}`;
+        const work_info = $('tr', '#work_outline');
 
-        const html = `${work_name.link(url)}` + '\n' +
+        let html = `${work_name.link(url)}` + '\n' +
                     `${work_maker}`;
+        work_info.map((index, element) => {
+            const name = $('th', element).text();
+            const value = $('td', element).text();
+            html.push(`\n${name}: ${value}`);
+        });
         
         console.log(html);
         bot.sendMessage(chatId, html, { parse_mode: 'HTML' });
