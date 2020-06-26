@@ -71,6 +71,7 @@ bot.onText(/\/info ([A-Z]{2}\d{6})/, async (msg, match) => {
                 return `${name}: ${value}`;
             })
             .get();
+        console.log(infos.length);
 
         let html = `${work_name.link(url)}` + '\n' + `${work_maker}`;
 
