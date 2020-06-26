@@ -70,14 +70,12 @@ bot.onText(/\/info ([A-Z]{2}\d{6})/, async (msg, match) => {
                 const value = $('td', element)
                     .map((index, element) => {
                         let html = '';
-                        element.children.forEach((child) => {
-                            const ele = $(child);
-                            const type = child.attribs['class'];
+                        element.children.forEach((ele) => {
+                            const child = $(ele);
+                            const type = child.attr('class');
                             switch (type) {
                                 case 'work_genre':
-                                    child.children.forEach((ele) => {
-                                        //
-                                    });
+                                    //
                                     break;
                                 case 'main_genre':
                                     html += ele.html();
