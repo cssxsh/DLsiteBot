@@ -71,7 +71,7 @@ bot.onText(/\/info ([A-Z]{2}\d{6})/, async (msg, match) => {
         work_info.map((index, element) => {
             const name = $('th', element).text();
             const value = $('td', element).text();
-            html.push(`\n${name}: ${value}`);
+            html.concat(`\n${name}: ${value}`);
         });
         
         console.log(html);
