@@ -31,8 +31,12 @@ const httpsServer = https.createServer(options, app);
 
 httpsServer.listen(PORT);
 
-bot.onText(/\/start/, () => {
-    bot.sendMessage('/start' + '\n' + '/info' + '\n' + '/echo');
+bot.onText(/\/start/, (msg) => {
+    const chatId = msg.chat.id;
+    const cmd = '/start' + '\n' + 
+                '/info' + '\n' + 
+                '/echo';
+    bot.sendMessage(chatId, cmd);
 });
 
 bot.onText(/\/info ([A-Z]{2}\d{6})/, async (msg, match) => {
@@ -59,9 +63,12 @@ bot.onText(/\/info ([A-Z]{2}\d{6})/, async (msg, match) => {
     try {
         const $ = cheerio.load(body);
         const work_name = $('#work_name').text().trim();
-        const markdown = `work_name: ${work_name.link(url)}`;
-        console.log(markdown);
-        bot.sendMessage(chatId, markdown, { parse_mode: 'HTML' });
+        const maker_name = $('#maker_name').html();
+
+        const html = `work_name: ${work_name.link(url)}` +
+                    `maker_name: ${maker_name}`;
+        console.log(html);
+        bot.sendMessage(chatId, html, { parse_mode: 'HTML' });
     } catch (e) {
         console.error(e);
     }
