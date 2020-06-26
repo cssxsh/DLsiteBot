@@ -78,11 +78,11 @@ bot.onText(/\/info ([A-Z]{2}\d{6})/, async (msg, match) => {
                                     //
                                     break;
                                 case 'main_genre':
-                                    html += ele.html();
+                                    html += child.html();
                                     break;
                                 default:
                                     const url = child.attr('href');
-                                    html += url ? ele.text().link(url) : ele.text();
+                                    html += url ? child.text().link(url) : child.text();
                             }
                         });
                         return html;
