@@ -1,18 +1,17 @@
 const TelegramBot = require('node-telegram-bot-api');
 const express = require('express');
 const bodyParser = require('body-parser');
-const request = require('request');
 const https = require('https');
 const fs = require('fs');
 const cheerio = require('cheerio');
 const got = require('got');
 
 const TOKEN = '1296868975:AAHaknJirDGHLR1aYqLwF0ka68TE81hs6WE';
-const url = 'https://racknerd.cssxsh.xyz';
-const port = 443;
+const URL = 'https://racknerd.cssxsh.xyz';
+const PORT = 443;
 
 const bot = new TelegramBot(TOKEN);
-bot.setWebHook(`${url}:${port}/bot${TOKEN}`);
+bot.setWebHook(`${URL}:${PORT}/bot${TOKEN}`);
 const app = express();
 app.use(bodyParser.json());
 
@@ -30,27 +29,14 @@ const options = {
 
 const httpsServer = https.createServer(options, app);
 
-httpsServer.listen(port);
+httpsServer.listen(PORT);
 
-bot.onText(/\/hentai/, function onLoveText(msg) {
-    bot.sendMessage(msg.chat.id, 'Are you a hetai?');
-});
-
-// app.listen(port);
-
-bot.onText(/\/prpr/, function onLoveText(msg) {
-    const chatId = msg.chat.id;
-    request('https://konachan.com/post.json?tags=ass&limit=50', function (error, response, body) {
-        if (!error && response.statusCode == 200) {
-            const result = JSON.parse(body) || [];
-            const index = parseInt(Math.random() * result.length);
-            bot.sendPhoto(chatId, result[index].file_url, { caption: '手冲一时爽，一直手冲一直爽' }).catch((err) => {
-                bot.sendMessage(chatId, '手冲失败');
-            });
-        } else {
-            bot.sendMessage(chatId, '手冲失败');
-        }
-    });
+bot.onText(/\/start/, () => {
+    bot.sendMessage(
+        '\/start' + '\n' +
+        '\/info' + '\n' +
+        '\/echo'
+    );
 });
 
 bot.onText(/\/info ([A-Z]{2}\d{6})/, async (msg, match) => {
@@ -79,7 +65,7 @@ bot.onText(/\/info ([A-Z]{2}\d{6})/, async (msg, match) => {
         const work_name = $('#work_name').text();
         const work_maker = $('#work_maker').html();
     
-        bot.sendMessage(chatId, `work_name: [${work_name}](${url})`);
+        bot.sendMessage(chatId, `work_name: [${work_name}](${url})`, {parse_mode : 'MarkdownV2'});
     } catch (e) {
         bot.sendMessage(chatId, response);
     }
