@@ -66,19 +66,37 @@ bot.onText(/\/info ([A-Z]{2}\d{6})/, async (msg, match) => {
 
         const infos = work_info
             .map((index, element) => {
-                const name = $('th', element).text();
-                const value = $('td', element).text();
+                const name = $('th', element).text().trim();
+                const value = $('td', element)
+                    .map((index, element) => {
+                        let html = '';
+                        element.children.forEach((child) => {
+                            const type = child.attribs['class'];
+                            switch (type) {
+                                case 'work_genre':
+                                    child.children.forEach((ele) => {
+                                        //
+                                    });
+                                    break;
+                                case 'main_genre':
+                                    html += child.html();
+                                    break;
+                                default:
+                                    const url = child.attribs['href'];
+                                    html += url ? child.text().link(url) : child.text();
+                            }
+                        });
+                        return html;
+                    })
+                    .get()
+                    .join(' ');
                 return `${name}: ${value}`;
             })
-            .get();
-        console.log(infos.length);
+            .get()
+            .join('\n');
+        // console.log(infos.length);
 
-        let html = `${work_name.link(url)}` + '\n' + `${work_maker}`;
-
-        infos.forEach(function (item) {
-            html += '\n';
-            html += item;
-        });
+        let html = `${work_name.link(url)}\n${work_maker}\n${infos}`;
 
         console.log(html);
         bot.sendMessage(chatId, html, { parse_mode: 'HTML' });
