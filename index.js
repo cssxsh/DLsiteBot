@@ -59,9 +59,9 @@ bot.onText(/\/info ([A-Z]{2}\d{6})/, async (msg, match) => {
     try {
         const $ = cheerio.load(body);
         const work_name = $('#work_name').text();
-        const work_maker = $('#work_maker').html();
-
-        bot.sendMessage(chatId, `work_name: [${work_name}](${url})`, { parse_mode: 'MarkdownV2' });
+        const markdown = `work_name: [${work_name}](${url})`;
+        
+        bot.sendMessage(chatId, markdown, { parse_mode: 'MarkdownV2' });
     } catch (e) {
         console.error(e);
     }
