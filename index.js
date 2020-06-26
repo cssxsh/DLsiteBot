@@ -81,7 +81,7 @@ bot.onText(/\/info ([A-Z]{2}\d{6})/, async (msg, match) => {
                                     html += ele.html();
                                     break;
                                 default:
-                                    const url = child.attribs['href'];
+                                    const url = child.attr('href');
                                     html += url ? ele.text().link(url) : ele.text();
                             }
                         });
